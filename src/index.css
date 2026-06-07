@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+  --color-bg: #0d0d0d;
+  --color-surface: #141414;
+  --color-surface2: #1c1c1c;
+  --color-amber: #f59e0b;
+  --color-amber-dark: #d97706;
+  --color-cream: #f0ede8;
+  --color-muted: #6b7280;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0d0d0d;
+  color: #f0ede8;
+  font-family: "JetBrains Mono", monospace;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+}
+
+/* Swiper overrides */
+.swiper-pagination-bullet {
+  background: rgba(240, 237, 232, 0.25) !important;
+  width: 6px !important;
+  height: 6px !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+  margin: 0 4px !important;
+}
+.swiper-pagination-bullet-active {
+  background: #f59e0b !important;
+  width: 20px !important;
+  border-radius: 3px !important;
+}
+.swiper-pagination {
+  text-align: right !important;
+  padding-right: 24px !important;
+  bottom: 24px !important;
+}
+
+/* Ken Burns zoom on active slide */
+@keyframes kenBurns {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.0);  }
+}
+.swiper-slide-active .kenburns {
+  animation: kenBurns 4.6s ease-out forwards;
+}
+
+/* Game dev card glow pulse */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(245,158,11,0.25), inset 0 0 0 1px rgba(245,158,11,0.3); }
+  50%       { box-shadow: 0 0 18px rgba(245,158,11,0.5), inset 0 0 0 1px rgba(245,158,11,0.6); }
+}
+@keyframes electricBorder {
+  0%   { border-color: rgba(245,158,11,0.4); }
+  33%  { border-color: rgba(253,224,71,0.7); }
+  66%  { border-color: rgba(245,158,11,0.3); }
+  100% { border-color: rgba(245,158,11,0.4); }
+}
+
+/* Education card glow + scan line */
+@keyframes ambientGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(245,158,11,0.12), 0 0 40px rgba(245,158,11,0.05); }
+  50%       { box-shadow: 0 0 35px rgba(245,158,11,0.28), 0 0 70px rgba(245,158,11,0.12); }
+}
+@keyframes scanDown {
+  0%   { top: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.edu-card-glow { animation: ambientGlow 3s ease-in-out infinite; }
+.scan-line {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(245,158,11,0.6), transparent);
+  animation: scanDown 3.5s linear infinite;
+  pointer-events: none;
+}
+
+/* Pong canvas in games section */
+.pong-canvas { position: absolute; inset: 0; pointer-events: none; }
+
+/* Minesweeper cells */
+.ms-cell {
+  user-select: none;
+  transition: background 0.08s;
+}
+.ms-cell:active { transform: scale(0.92); }
+
+/* ShinyText sweep animations */
+@keyframes shinyLeft {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+@keyframes shinyRight {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+
+/* Infinite photo strip */
+@keyframes stripScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.photo-strip {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: stripScroll 36s linear infinite;
+  will-change: transform;
+}
